@@ -1,5 +1,6 @@
 ---
 title: "Historical horse population in Canada"
+bibliography: ref_horse.bib
 output: 
   github_document:
     toc: true
@@ -35,7 +36,7 @@ The R programming language and the following R packages were used to perform the
 
 ## Results
 
-```{r plot horses, fig.width=10, fig.height=3 fig.cap = "Figure 1: The number of horses per province in Canada from 1900 to 1972." + out.width = '100%'}
+```{r plot horses, fig.width=10, fig.height=3, fig.cap = "Figure 1: The number of horses per province in Canada from 1900 to 1972." + out.width = '100%'}
 horse_plot <- ggplot(horse_pop, aes(x = Ref_Date, y = Value)) +
   geom_point() +
   geom_line() +
@@ -46,12 +47,13 @@ horse_plot <- ggplot(horse_pop, aes(x = Ref_Date, y = Value)) +
   scale_y_continuous(labels = scales::comma) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 horse_plot
+
 knitr::include_graphics("../hist_horse_plot.png")
 ```
 
-We can see from the visualisation above that Ontario, Saskatchewan and Alberta have had the highest horse populations in Canada. All provinces have had a decline in horse populations since 1940. This is likely due to the rebound of the Canadian automotive industry after the Great Depression and the Second World War. An interesting follow-up visualization would be car sales per year for each Province over the time period visualised above to further support this hypothesis.
+We can see from the visualisation above that Ontario, Saskatchewan and Alberta have had the highest horse populations in Canada. All provinces have had a decline in horse populations since 1940. This is likely due to the rebound of the Canadian automotive industry [@melanson2009learning] after the Great Depression and the Second World War [@anastakis2005auto]. An interesting follow-up visualization would be car sales per year for each Province over the time period visualised above to further support this hypothesis.
 
-Next we look at the range of the number horses for each provinces at any time point between 1940 - 1972:
+Next we look at the range of the number horses for each provinces at any time point between 1940 - 1972 (refer to max_horses):
 
 ```{r max horse table}
 max_horses <- horse_pop %>% 
@@ -67,7 +69,7 @@ knitr::kable(max_horses, caption = "Table 1. This is a summary of the horse numb
 
 Below we zoom in and look at the province of Alberta:
 
-```{r plot province, fig.width=5, fig.height=4 "Figure 2: The number of horses in Alberta from 1900 to 1972." + out.width = '100%'}
+```{r plot province, fig.width=5, fig.height=4, fig.cap= "Figure 2: The number of horses in Alberta from 1900 to 1972." + out.width = '100%'}
 province_plot <- horse_pop %>% 
   filter(GEO == "Alberta") %>% 
   ggplot(aes(x = Ref_Date, y = Value)) +
@@ -81,3 +83,5 @@ province_plot <- horse_pop %>%
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 province_plot
 ```
+
+# References
